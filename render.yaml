@@ -1,0 +1,41 @@
+# Render Blueprint for Personal Accounting App
+services:
+  # Web Service
+  - type: web
+    name: accounting-app
+    env: node
+    plan: starter # Free tier available
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      # Database - will be set after MongoDB addon
+      - key: MONGODB_URI
+        fromDatabase:
+          name: accounting-db
+          property: connectionString
+      # These will be added via Render dashboard or environment variables
+      - key: JWT_SECRET
+        generateValue: true
+      - key: PLAID_CLIENT_ID
+        sync: false
+      - key: PLAID_SECRET
+        sync: false
+      - key: PLAID_ENV
+        value: sandbox
+      - key: PAYPAL_CLIENT_ID
+        sync: false
+      - key: PAYPAL_CLIENT_SECRET
+        sync: false
+      - key: PAYPAL_MODE
+        value: sandbox
+
+databases:
+  # MongoDB Database
+  - name: accounting-db
+    databaseName: accounting_app
+    plan: starter # Free tier: 500MB storage
