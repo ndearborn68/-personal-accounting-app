@@ -16,6 +16,7 @@ const dashboardRoutes = require('./routes/dashboard');
 const companiesRoutes = require('./routes/companies');
 const creditCardsRoutes = require('./routes/creditCards');
 const sbaLoanRoutes = require('./routes/sbaLoan');
+const quickbooksRoutes = require('./routes/quickbooks');
 const syncJobs = require('./jobs/syncAll');
 
 const app = express();
@@ -50,6 +51,7 @@ app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/companies', companiesRoutes);
 app.use('/api/credit-cards', creditCardsRoutes);
 app.use('/api/sba-loans', sbaLoanRoutes);
+app.use('/api/quickbooks', quickbooksRoutes);
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
