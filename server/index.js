@@ -5,6 +5,7 @@ const compression = require('compression');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cron = require('node-cron');
+const path = require('path');
 require('dotenv').config();
 
 const plaidRoutes = require('./routes/plaid');
@@ -20,12 +21,17 @@ const syncJobs = require('./jobs/syncAll');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: false,
+}));
 app.use(cors());
 app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
+
+// Serve static files from public directory
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/accounting-app', {
   useNewUrlParser: true,
