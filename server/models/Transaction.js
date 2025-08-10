@@ -131,7 +131,6 @@ transactionSchema.index({ date: -1 });
 transactionSchema.index({ category: 1 });
 transactionSchema.index({ source: 1 });
 transactionSchema.index({ accountId: 1 });
-transactionSchema.index({ sourceId: 1 }, { unique: true });
 transactionSchema.index({ company: 1 });
 transactionSchema.index({ company: 1, date: -1 });
 

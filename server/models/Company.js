@@ -61,7 +61,6 @@ const companySchema = new mongoose.Schema({
   },
 });
 
-companySchema.index({ name: 1 });
 companySchema.index({ isActive: 1 });
 
 companySchema.statics.getCompanyStats = async function(companyName, startDate, endDate) {

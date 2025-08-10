@@ -78,7 +78,6 @@ const accountSchema = new mongoose.Schema({
 accountSchema.index({ source: 1 });
 accountSchema.index({ accountType: 1 });
 accountSchema.index({ isActive: 1 });
-accountSchema.index({ sourceAccountId: 1 }, { unique: true });
 
 accountSchema.methods.updateBalance = async function(currentBalance, availableBalance) {
   this.currentBalance = currentBalance;
